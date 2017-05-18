@@ -1,13 +1,17 @@
 package Vista;
 
 import Controlador.cartaControlador;
-import Pojos.Carta;
+import Controlador.jugadorCartillaControlador;
+import Controlador.jugadorControlador;
+import Pojos.Jugador;
 import Pojos.OpcionesIniciales;
+import Pojos.jugador_cartillas;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +20,8 @@ import javax.swing.JOptionPane;
 public class frmJuego extends javax.swing.JFrame {
     
     private OpcionesIniciales oi;
+    private jugadorControlador jdao;
+    private jugadorCartillaControlador jcdao;
     
     public frmJuego() {
         initComponents();
@@ -26,6 +32,9 @@ public class frmJuego extends javax.swing.JFrame {
         initComponents();
         this.oi = oi_padre;
         this.setExtendedState(frmJuego.MAXIMIZED_BOTH);
+        
+        jdao = new jugadorControlador();
+        jcdao = new jugadorCartillaControlador();
     }
     
     private void mostrarCartilla() {
@@ -40,15 +49,80 @@ public class frmJuego extends javax.swing.JFrame {
 
         // poniendo el numero de jugadores
         if (cant_jugadores == 2) {
+            this.lblJugador1.setText("JUGADOR 1");
+            this.lblJugador3.setText("JUGADOR 2");
+            this.lblColor1.setBackground(new java.awt.Color(204, 0, 0));
+            this.lblColor3.setBackground(new java.awt.Color(0, 102, 0));
+            
+            this.poniendoLabel(true, false, true, false);
+            this.lblJugadorUnoUno.setBackground(new java.awt.Color(204, 0, 0));
+            this.lblJugadorUnoUno.setForeground(new java.awt.Color(186, 217, 214));
+            
+            this.lblJugadorUnoDos.setBackground(new java.awt.Color(204, 0, 0));
+            this.lblJugadorUnoDos.setForeground(new java.awt.Color(186, 217, 214));
+            
             this.lblJugadorDosUno.setVisible(false);
             this.lblJugadorDosDos.setVisible(false);
+            
+            this.lblJugadorTresUno.setBackground(new java.awt.Color(0, 102, 0));
+            this.lblJugadorTresUno.setForeground(new java.awt.Color(186, 217, 214));
+            
+            this.lblJugadorTresDos.setBackground(new java.awt.Color(0, 102, 0));
+            this.lblJugadorTresDos.setForeground(new java.awt.Color(186, 217, 214));
+            
             this.lblJugadorCuatroUno.setVisible(false);
             this.lblJugadorCuatroDos.setVisible(false);
         }
         
         if (cant_jugadores == 3) {
+            this.lblJugador3.setText("JUGADOR 1");
+            this.lblJugador2.setText("JUGADOR 2");
+            this.lblJugador4.setText("JUGADOR 3");
+            this.lblColor3.setBackground(new java.awt.Color(204, 0, 0));
+            this.lblColor2.setBackground(new java.awt.Color(0, 102, 0));
+            this.lblColor4.setBackground(new java.awt.Color(0, 0, 102));
+            
+            this.poniendoLabel(false, true, true, true);
+            this.lblJugadorTresUno.setBackground(new java.awt.Color(204, 0, 0));
+            this.lblJugadorTresUno.setForeground(new java.awt.Color(186, 217, 214));
+            this.lblJugadorTresDos.setBackground(new java.awt.Color(204, 0, 0));
+            this.lblJugadorTresDos.setForeground(new java.awt.Color(186, 217, 214));
+            
+            this.lblJugadorDosUno.setBackground(new java.awt.Color(0, 102, 0));
+            this.lblJugadorDosUno.setForeground(new java.awt.Color(186, 217, 214));
+            this.lblJugadorDosDos.setBackground(new java.awt.Color(0, 102, 0));
+            this.lblJugadorDosDos.setForeground(new java.awt.Color(186, 217, 214));
+            
+            this.lblJugadorCuatroUno.setBackground(new java.awt.Color(0, 0, 102));
+            this.lblJugadorCuatroUno.setForeground(new java.awt.Color(186, 217, 214));
+            this.lblJugadorCuatroDos.setBackground(new java.awt.Color(0, 0, 102));
+            this.lblJugadorCuatroDos.setForeground(new java.awt.Color(186, 217, 214));
+            
             this.lblJugadorUnoUno.setVisible(false);
             this.lblJugadorUnoDos.setVisible(false);
+        }
+        
+        if (cant_jugadores == 4) {
+            poniendoLabel(true, true, true, true);
+            this.lblJugadorUnoUno.setBackground(new java.awt.Color(204, 0, 0));
+            this.lblJugadorUnoUno.setForeground(new java.awt.Color(186, 217, 214));
+            this.lblJugadorUnoDos.setBackground(new java.awt.Color(204, 0, 0));
+            this.lblJugadorUnoDos.setForeground(new java.awt.Color(186, 217, 214));
+            
+            this.lblJugadorDosUno.setBackground(new java.awt.Color(0, 102, 0));
+            this.lblJugadorDosUno.setForeground(new java.awt.Color(186, 217, 214));
+            this.lblJugadorDosDos.setBackground(new java.awt.Color(0, 102, 0));
+            this.lblJugadorDosDos.setForeground(new java.awt.Color(186, 217, 214));
+            
+            this.lblJugadorTresUno.setBackground(new java.awt.Color(0, 0, 102));
+            this.lblJugadorTresUno.setForeground(new java.awt.Color(186, 217, 214));
+            this.lblJugadorTresDos.setBackground(new java.awt.Color(0, 0, 102));
+            this.lblJugadorTresDos.setForeground(new java.awt.Color(186, 217, 214));
+            
+            this.lblJugadorCuatroUno.setBackground(new java.awt.Color(255,204,0));
+            this.lblJugadorCuatroUno.setForeground(new java.awt.Color(186, 217, 214));
+            this.lblJugadorCuatroDos.setBackground(new java.awt.Color(255,204,0));
+            this.lblJugadorCuatroDos.setForeground(new java.awt.Color(186, 217, 214));
         }
         
         if (cant_tableros == 1) {
@@ -58,15 +132,42 @@ public class frmJuego extends javax.swing.JFrame {
             this.lblJugadorCuatroDos.setVisible(false);
         }
     }
-
-    // llenando datos
-    private void llenandoDatos() throws IOException {
-        cartaControlador cdao = new cartaControlador();
-        List<Carta> clist = cdao.getRecursos();
-        clist.forEach((carta) -> {
-            System.out.println("la carta en la posicion: " + carta.getId() + " es: " + carta.getNombre());
-        });
+    
+    private void poniendoLabel(boolean f1, boolean f2, boolean f3, boolean f4){
+        lblColor1.setVisible(f1);
+        lblJugador1.setVisible(f1);
+        lblColor2.setVisible(f2);
+        lblJugador2.setVisible(f2);
+        lblColor3.setVisible(f3);
+        lblJugador3.setVisible(f3);
+        lblColor4.setVisible(f4);
+        lblJugador4.setVisible(f4);
     }
+    
+    /**
+     * AQUI INICIAN LOS METODOS DE LA FUNCIONALIDAD DEL JUEGO
+     */
+    
+    private void guardandoJugadores(){
+        for (int i = 0; i < oi.getNumero_jugadores(); i++) {
+            Jugador jug = new Jugador();
+            jug.setId((i + 1));
+            jug.setNombre("Jugador " + (i + 1));
+            
+            List<Integer> num_carts = new ArrayList<>();
+            for (int j = 0; j < oi.getNumero_tablas(); j++) {
+                jugador_cartillas jug_c = new jugador_cartillas();
+                jug_c.setId((j + 1));
+                jug_c.setId_jugador(jug.getId());
+                // aignando la cartilla aleatoriamente
+                
+            }
+        }
+    }
+    
+    /**
+     * FIN DE LOS METODOS DE LA FUNCIONALIDAD
+     */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,6 +184,17 @@ public class frmJuego extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jPanel16 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jPanel18 = new javax.swing.JPanel();
+        lblColor1 = new javax.swing.JLabel();
+        lblJugador1 = new javax.swing.JLabel();
+        lblColor2 = new javax.swing.JLabel();
+        lblJugador2 = new javax.swing.JLabel();
+        lblColor3 = new javax.swing.JLabel();
+        lblJugador3 = new javax.swing.JLabel();
+        lblColor4 = new javax.swing.JLabel();
+        lblJugador4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         pnlSurPadre = new javax.swing.JPanel();
@@ -159,6 +271,72 @@ public class frmJuego extends javax.swing.JFrame {
         jPanel4.add(jButton1, java.awt.BorderLayout.EAST);
 
         jPanel2.add(jPanel4, java.awt.BorderLayout.NORTH);
+
+        jPanel16.setBackground(new java.awt.Color(1, 3, 38));
+        jPanel16.setLayout(new java.awt.BorderLayout());
+
+        jPanel17.setBackground(new java.awt.Color(1, 3, 38));
+        jPanel17.setPreferredSize(new java.awt.Dimension(15, 85));
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 15, Short.MAX_VALUE)
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 85, Short.MAX_VALUE)
+        );
+
+        jPanel16.add(jPanel17, java.awt.BorderLayout.LINE_START);
+
+        jPanel18.setBackground(new java.awt.Color(1, 3, 38));
+        jPanel18.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 15, 30));
+
+        lblColor1.setBackground(new java.awt.Color(204, 0, 0));
+        lblColor1.setForeground(new java.awt.Color(186, 217, 214));
+        lblColor1.setOpaque(true);
+        lblColor1.setPreferredSize(new java.awt.Dimension(15, 15));
+        jPanel18.add(lblColor1);
+
+        lblJugador1.setForeground(new java.awt.Color(186, 217, 214));
+        lblJugador1.setText("JUGADOR 1");
+        jPanel18.add(lblJugador1);
+
+        lblColor2.setBackground(new java.awt.Color(0, 102, 0));
+        lblColor2.setForeground(new java.awt.Color(186, 217, 214));
+        lblColor2.setOpaque(true);
+        lblColor2.setPreferredSize(new java.awt.Dimension(15, 15));
+        jPanel18.add(lblColor2);
+
+        lblJugador2.setForeground(new java.awt.Color(186, 217, 214));
+        lblJugador2.setText("JUGADOR 2");
+        jPanel18.add(lblJugador2);
+
+        lblColor3.setBackground(new java.awt.Color(0, 0, 102));
+        lblColor3.setForeground(new java.awt.Color(186, 217, 214));
+        lblColor3.setOpaque(true);
+        lblColor3.setPreferredSize(new java.awt.Dimension(15, 15));
+        jPanel18.add(lblColor3);
+
+        lblJugador3.setForeground(new java.awt.Color(186, 217, 214));
+        lblJugador3.setText("JUGADOR 3");
+        jPanel18.add(lblJugador3);
+
+        lblColor4.setBackground(new java.awt.Color(255, 204, 0));
+        lblColor4.setForeground(new java.awt.Color(186, 217, 214));
+        lblColor4.setOpaque(true);
+        lblColor4.setPreferredSize(new java.awt.Dimension(15, 15));
+        jPanel18.add(lblColor4);
+
+        lblJugador4.setForeground(new java.awt.Color(186, 217, 214));
+        lblJugador4.setText("JUGADOR 4");
+        jPanel18.add(lblJugador4);
+
+        jPanel16.add(jPanel18, java.awt.BorderLayout.CENTER);
+
+        jPanel2.add(jPanel16, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
@@ -436,8 +614,12 @@ public class frmJuego extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-        new MenuPrincipal().setVisible(true);
+        try {
+            this.dispose();
+            new MenuPrincipal().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(frmJuego.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void lblJugadorUnoUnoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblJugadorUnoUnoMouseClicked
@@ -473,12 +655,7 @@ public class frmJuego extends javax.swing.JFrame {
     }//GEN-LAST:event_lblJugadorCuatroDosMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
-            this.opcionesIniciales();
-            this.llenandoDatos();
-        } catch (IOException ex) {
-            Logger.getLogger(frmJuego.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.opcionesIniciales();
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -517,10 +694,8 @@ public class frmJuego extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmJuego().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new frmJuego().setVisible(true);
         });
     }
 
@@ -536,6 +711,9 @@ public class frmJuego extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -544,6 +722,14 @@ public class frmJuego extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel lblColor1;
+    private javax.swing.JLabel lblColor2;
+    private javax.swing.JLabel lblColor3;
+    private javax.swing.JLabel lblColor4;
+    private javax.swing.JLabel lblJugador1;
+    private javax.swing.JLabel lblJugador2;
+    private javax.swing.JLabel lblJugador3;
+    private javax.swing.JLabel lblJugador4;
     private javax.swing.JLabel lblJugadorCuatroDos;
     private javax.swing.JLabel lblJugadorCuatroUno;
     private javax.swing.JLabel lblJugadorDosDos;

@@ -18,56 +18,99 @@ import java.util.List;
  */
 public class cartillaControlador implements controlador<Cartilla> {
 
-    private List<Cartilla> cartilla_list;
-    
-    public cartillaControlador(){
-        cartilla_list = new ArrayList<>();
+    private final RandomAccessFile raf;
+    private static final int LENGTH = 75;
+
+    public cartillaControlador() throws IOException {
+        raf = RandomConector.buildRandom("cartillas.dat").getRandomAccessFile();
     }
 
     @Override
     public int guardar(Cartilla t) {
-        if(t == null){
-            return 0;
+        try {
+            if (t == null) {
+                return 0;
+            }
+
+            raf.seek(0);
+            int n = raf.readInt();
+            long pos = 4 + (LENGTH * n);
+
+            raf.seek(pos);
+            raf.writeInt(n + 1);
+            raf.writeUTF(metodosControlador.limitString(t.getNombre(), 30));
+
+            raf.seek(0);
+            raf.writeInt(n + 1);
+
+            return 1;
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+            return -1;
         }
-        
-        this.cartilla_list.add(t);
-        return 1;
     }
 
     @Override
     public List<Cartilla> getRecursos() {
-        return this.cartilla_list;
+        try {
+            raf.seek(0);
+            int n = raf.readInt();
+            List<Cartilla> cartillas = new ArrayList<>();
+
+            for (int i = 0; i < n; i++) {
+                long pos = 4 + (LENGTH * i);
+                Cartilla c = new Cartilla();
+                raf.seek(pos);
+                c.setId(raf.readInt());
+                c.setNombre(raf.readUTF().trim());
+
+                cartillas.add(c);
+            }
+
+            return cartillas;
+        } catch (IOException ex) {
+            System.err.println("Error: " + ex.getMessage());
+            return null;
+        }
     }
 
     @Override
     public Cartilla buscarPorID(int id) {
         for (Cartilla recurso : getRecursos()) {
-            int ids = recurso.getId();
-            if (ids == id) {
+            if (recurso.getId() == id) {
                 return recurso;
             }
         }
-        
+
         return null;
     }
 
     @Override
     public boolean modificar(Cartilla t) {
-        if (t == null) {
+        try {
+            if (t == null) {
+                return false;
+            }
+
+            int id = t.getId();
+
+            long pos = 4 + (id - 1) * LENGTH;
+
+            raf.seek(pos);
+            raf.writeInt(t.getId());
+            raf.writeUTF(metodosControlador.limitString(t.getNombre(), 30));
+
+            return true;
+        } catch (IOException ex) {
+            System.err.println("Error: " + ex.getMessage());
             return false;
         }
-        
-        int i = 0;
-        for (Cartilla recurso : getRecursos()) {
-            if (recurso.getId() == t.getId()) {
-                getRecursos().set(i, t);
-                return true;
-            }
-            
-            i++;
+    }
+
+    public void cerrar() throws IOException {
+        if (raf != null) {
+            raf.close();
         }
-        
-        return false;
     }
 
 }

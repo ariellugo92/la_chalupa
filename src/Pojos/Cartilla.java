@@ -7,11 +7,11 @@ package Pojos;
 public class Cartilla {
 
     private int id;
-    private int cartas[][];
+    private String nombre;
 
     public Cartilla() {
     }
-    
+
     public int getId() {
         return id;
     }
@@ -20,11 +20,11 @@ public class Cartilla {
         this.id = id;
     }
 
-    public int[][] getCartas() {
-        return cartas;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setCartas(int[][] cartas) {
-        this.cartas = cartas;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

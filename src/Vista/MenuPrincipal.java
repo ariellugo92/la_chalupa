@@ -1,8 +1,18 @@
 package Vista;
 
 import Controlador.cartillaControlador;
+import Controlador.datoCartillaControlador;
+import Controlador.metodosControlador;
 import Pojos.Cartilla;
 import Pojos.OpcionesIniciales;
+import Pojos.dato_cartilla;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,455 +21,15 @@ import javax.swing.JOptionPane;
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    public cartillaControlador cc;
-    
-    public MenuPrincipal() {
+    private cartillaControlador cdao;
+    private datoCartillaControlador dcdao;
+    private int x;
+    private int y;
+
+    public MenuPrincipal() throws IOException {
         initComponents();
-        
-        cc = new cartillaControlador();
-    }
-    
-    public void llenandoDatos(){
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c2 = new Cartilla();
-        c2.setId(2);
-        int [][] arr_c2 = new int[4][4];
-        arr_c2[0][0] = 6;
-        arr_c2[0][1] = 7;
-        arr_c2[0][2] = 8;
-        arr_c2[0][3] = 9;
-        arr_c2[1][0] = 15;
-        arr_c2[1][1] = 16;
-        arr_c2[1][2] = 18;
-        arr_c2[1][3] = 19;
-        arr_c2[2][0] = 24;
-        arr_c2[2][1] = 25;
-        arr_c2[2][2] = 26;
-        arr_c2[2][3] = 27;
-        arr_c2[3][0] = 33;
-        arr_c2[3][1] = 34;
-        arr_c2[3][2] = 35;
-        arr_c2[3][3] = 36;
-        c2.setCartas(arr_c2);
-        
-        Cartilla c3 = new Cartilla();
-        c3.setId(3);
-        int [][] arr_c3 = new int[4][4];
-        arr_c3[0][0] = 2;
-        arr_c3[0][1] = 3;
-        arr_c3[0][2] = 4;
-        arr_c3[0][3] = 5;
-        arr_c3[1][0] = 7;
-        arr_c3[1][1] = 8;
-        arr_c3[1][2] = 9;
-        arr_c3[1][3] = 10;
-        arr_c3[2][0] = 12;
-        arr_c3[2][1] = 13;
-        arr_c3[2][2] = 14;
-        arr_c3[2][3] = 15;
-        arr_c3[3][0] = 17;
-        arr_c3[3][1] = 18;
-        arr_c3[3][2] = 19;
-        arr_c3[3][3] = 20;
-        c3.setCartas(arr_c3);
-        
-        Cartilla c4 = new Cartilla();
-        c4.setId(1);
-        int [][] arr_c4 = new int[4][4];
-        arr_c4[0][0] = 1;
-        arr_c4[0][1] = 2;
-        arr_c4[0][2] = 3;
-        arr_c4[0][3] = 4;
-        arr_c4[1][0] = 10;
-        arr_c4[1][1] = 11;
-        arr_c4[1][2] = 12;
-        arr_c4[1][3] = 13;
-        arr_c4[2][0] = 19;
-        arr_c4[2][1] = 20;
-        arr_c4[2][2] = 21;
-        arr_c4[2][3] = 22;
-        arr_c4[3][0] = 28;
-        arr_c4[3][1] = 29;
-        arr_c4[3][2] = 30;
-        arr_c4[3][3] = 31;
-        c4.setCartas(arr_c4);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
-        
-        Cartilla c1 = new Cartilla();
-        c1.setId(1);
-        int [][] arr_c1 = new int[4][4];
-        arr_c1[0][0] = 1;
-        arr_c1[0][1] = 2;
-        arr_c1[0][2] = 3;
-        arr_c1[0][3] = 4;
-        arr_c1[1][0] = 10;
-        arr_c1[1][1] = 11;
-        arr_c1[1][2] = 12;
-        arr_c1[1][3] = 13;
-        arr_c1[2][0] = 19;
-        arr_c1[2][1] = 20;
-        arr_c1[2][2] = 21;
-        arr_c1[2][3] = 22;
-        arr_c1[3][0] = 28;
-        arr_c1[3][1] = 29;
-        arr_c1[3][2] = 30;
-        arr_c1[3][3] = 31;
-        c1.setCartas(arr_c1);
+        cdao = new cartillaControlador();
+        dcdao = new datoCartillaControlador();
     }
 
     /**
@@ -516,6 +86,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(186, 217, 214));
         jLabel2.setText("JUEGO  DE LA CHALUPA");
         jLabel2.setOpaque(true);
+        jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLabel2MouseDragged(evt);
+            }
+        });
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel2MousePressed(evt);
+            }
+        });
         jPanel4.add(jLabel2, java.awt.BorderLayout.CENTER);
 
         jButton1.setBackground(new java.awt.Color(1, 3, 38));
@@ -668,8 +248,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // metodo cuando le den click al boton jugar
-    private void iniciarJuego(){
-        if(!radioTradicional.isSelected() && !radioRellenarTodo.isSelected()){
+    private void iniciarJuego() {
+        if (!radioTradicional.isSelected() && !radioRellenarTodo.isSelected()) {
             JOptionPane.showMessageDialog(this, "Seleccione la forma de juego");
             return;
         }
@@ -679,19 +259,40 @@ public class MenuPrincipal extends javax.swing.JFrame {
         oi.setNumero_tablas((int) spinerTablas.getValue());
         int forma = radioTradicional.isSelected() ? 0 : 1;
         oi.setForma_juego(forma);
-        
+
         frmJuego jugar = new frmJuego(oi);
         jugar.setVisible(true);
         this.setVisible(false);
     }
-    
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    List<Integer> num = new ArrayList<>();
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
-        this.iniciarJuego();
+//        this.iniciarJuego();
+        int num_al = metodosControlador.getNumeroAleatorioNoRepetido(1, 20, num);
+        num.add(num_al);
+        
+        System.out.println("El numero arrojado es: " + num_al);
+        
+        int i = 0;
+        for (Integer integer : num) {
+            System.out.println("Elemento de la lista " + i + " es: " + integer);
+            i++;
+        }
     }//GEN-LAST:event_btnJugarActionPerformed
+
+    private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jLabel2MousePressed
+
+    private void jLabel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseDragged
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        setLocation(point.x - x, point.y - y);
+    }//GEN-LAST:event_jLabel2MouseDragged
 
     /**
      * @param args the command line arguments
@@ -723,7 +324,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuPrincipal().setVisible(true);
+                try {
+                    new MenuPrincipal().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

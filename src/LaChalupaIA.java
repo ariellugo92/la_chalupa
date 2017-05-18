@@ -1,5 +1,8 @@
 
 import Vista.MenuPrincipal;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,7 +21,11 @@ public class LaChalupaIA {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new MenuPrincipal().setVisible(true);
+        try {
+            new MenuPrincipal().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(LaChalupaIA.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
